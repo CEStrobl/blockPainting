@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="style.css">
+	<link rel="icon" href="img/bookshelf.png">
+	<title>Block Painter</title>
+</head>
+<body>
+
+	<h1>Minecraft Block Painter</h1>
+
+	<h3>Select a Block:</h3>
+	<div id="blockSelection" class="row">
+	</div>
+
+	<div id="container">
+
+	</div>
+</body>
+<script>
+	document.addEventListener('mousedown', function(event) {
+    if (event.which === 1) { // Left mouse button
+        isMouseDown = true;
+        selected = prevSelected;
+    } else if (event.which === 3) { // Right mouse button
+        prevSelected = selected;
+        selected = 0; // Change to empty block
+    }
+}, true);
+
+document.addEventListener('mouseup', function(event) {
+    if (event.which) isMouseDown = false;
+}, true);
+
+document.addEventListener('contextmenu', function(event) {
+    // Check if right-click occurred inside the grid container
+    if (event.target.closest('#container')) {
+        event.preventDefault(); // Prevent the default right-click behavior
+    }
+});
+
+</script>
+<script src="blockBuilder.js"></script>
+<script src="script.js"></script>
+</html>

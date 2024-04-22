@@ -24,7 +24,7 @@ img{
 }
 
 img:hover{
-	filter: brightness(2);
+	filter: brightness(1.5);
 }
 
 #blockSelection{
@@ -34,8 +34,40 @@ img:hover{
 }
 
 .selected {
-	border: 3px solid rgb(255, 47, 0) !important;
+	border: 3px solid rgb(57, 64, 197) !important;
 }
 #blockSelection img {
 	border: 3px solid white;
+	transition: 0.2s ease;
+}
+
+#blockSelection img:hover {
+	border: 3px solid rgb(22, 61, 146) !important;
+}
+
+
+input {
+	width: 50px;
+	padding: 5px;
+	border: 1px black solid;
+	margin-right: 20px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+
+button{
+	border: none;
+	background-color: darkgreen;
+	color:white;
+	padding:10px 20px 10px 20px;
+	transition: 0.4s ease;
+}
+
+button:hover{
+	background-color: green;
 }

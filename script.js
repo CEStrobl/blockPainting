@@ -13,15 +13,18 @@ let blockNames = ["empty",
 let blockImgs = []
 // automate that later ^
 
-let blockObjects = []
+let blockSelectionElements = []
+
+let blockGridElements = []
+
+let blockCoords = []
 
 let selected = 1; // spruce log
 let prevSelected = selected;
 
 let isMouseDown = false;
 
-const width = 15;
-const height = 10;
+
 
 
 
@@ -39,21 +42,21 @@ function populateBlockImgs() {
 populateBlockImgs() 
 
 
-function updateBlock(thisBlock, event) {
+function updateBlock(thisBlock, event, index) {
     if (isMouseDown || (event && event.which === 3)) { // Check for left mouse button or right mouse button click
         if (event && event.which === 3) { // If right mouse button clicked, set to empty block
             thisBlock.src = blockImgs[0];
         } else { // Otherwise, update with selected block
             thisBlock.src = blockImgs[selected];
-			console.log(selected)
+			console.log(blockCoords[index])
         }
     }
 }
 
 
 function clearBlockSelection() {
-	for (let i = 0; i < blockObjects.length; i++) {
-		const thisBlock = blockObjects[i];
+	for (let i = 0; i < blockSelectionElements.length; i++) {
+		const thisBlock = blockSelectionElements[i];
 		
 		thisBlock.className = ""
 	}
@@ -78,7 +81,7 @@ function populateBlockSelection() {
 
 		let thisBlock = document.getElementById(blockName)
 
-		blockObjects.push(thisBlock)
+		blockSelectionElements.push(thisBlock)
 
 		thisBlock.onclick = function() {
 			selectBlock(thisBlock, i)
@@ -91,7 +94,20 @@ populateBlockSelection()
 
 let container = document.getElementById("container")
 
+function burnGrid() {
+	for (let index = 0; index < blockGridElements.length; index++) {
+		const x = blockGridElements[index];
+		
+		x.remove()
+	}
+}
+
 function buildGrid() {
+
+	burnGrid()
+
+	let width = document.getElementById('width').value;
+	let height = document.getElementById('height').value;
 	// create rows
 	for (let i = 0; i < height; i++) {
 
@@ -104,11 +120,15 @@ function buildGrid() {
 			
 			let thisimg = document.getElementById("row"+i+"col"+o)
 
+			let thisIndex = blockGridElements.length
+			blockGridElements.push(thisimg)
+			blockCoords.push([i,o])
+
 			thisimg.onmouseover = function(event) {
-				updateBlock(thisimg, event); // Pass the event object to updateBlock
+				updateBlock(thisimg, event, thisIndex); // Pass the event object to updateBlock
 			};
 			thisimg.onmousedown = function(event) {
-				updateBlock(thisimg, event); // Pass the event object to updateBlock
+				updateBlock(thisimg, event,thisIndex); // Pass the event object to updateBlock
 			};
 		}
 	}
@@ -117,5 +137,4 @@ function buildGrid() {
 
 
 
-buildGrid()
 

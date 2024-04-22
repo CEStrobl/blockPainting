@@ -1,4 +1,3 @@
-
 /**
  * 
  * @param {object} divIn 
@@ -39,6 +38,7 @@ function embedElement(divIn, type, content, id, cssClass) {
 	newDiv.innerHTML = content;
 	
 	newDiv.id = id
+
 
 	divIn.appendChild(newDiv)
 }

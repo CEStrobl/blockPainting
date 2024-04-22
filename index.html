@@ -11,15 +11,29 @@
 
 	<h1>Minecraft Block Painter</h1>
 
-	<h3>Grid Size:</h3>
-	Width: <input id="width" type="number">
-	Height:<input id="height" type="number">
+	<div class="row" style="justify-content: space-evenly;">
+		<div class="grid-selector column">
+			<h3>Grid Size:</h3>
+			<span class="row">
+				Width: <input id="width" type="number" placeholder="10">
+			</span>
+			<span class="row">
+				Height: <input id="height" type="number" placeholder="10">
+			</span>
+			
+			<button onclick="buildGrid()">Build New Grid</button>
+		</div>
+	
+	
+		<div class="column" style="align-items: flex-start;">
+			<h3>Select a Block:</h3>
+			<div id="blockSelection" class="row">
+			</div>
 
-	<button onclick="buildGrid()">Build Grid</button>
+		</div>
 
-	<h3>Select a Block:</h3>
-	<div id="blockSelection" class="row">
 	</div>
+
 
 	<div id="container">
 

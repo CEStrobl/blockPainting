@@ -24,6 +24,9 @@ let prevSelected = selected;
 
 let isMouseDown = false;
 
+let activeWidth = 0;
+let activeHeight = 0;
+
 
 
 
@@ -102,12 +105,23 @@ function burnGrid() {
 	}
 }
 
-function buildGrid() {
+function buildGrid(width, height) {
 
 	burnGrid()
 
-	let width = document.getElementById('width').value;
-	let height = document.getElementById('height').value;
+	if (width == null ) {
+		width = document.getElementById('width').value;
+		height = document.getElementById('height').value;
+	}
+
+	if (width > 100) {
+		width = 100
+		document.getElementById('width').value = "100"
+	}
+	if (height > 100) {
+		height = 100
+		document.getElementById('height').value = "100"
+	}
 	// create rows
 	for (let i = 0; i < height; i++) {
 
@@ -134,6 +148,8 @@ function buildGrid() {
 	}
 
 }
+
+buildGrid(10,10)
 
 
 

@@ -11,9 +11,16 @@
 
 	<h1>Minecraft Block Painter</h1>
 
-	<div class="row" style="justify-content: space-evenly;">
+	<!-- THINGS TO DO -->
+	<!-- Add more blocks -->
+	<!-- Organize Block Selection -->
+	<!-- Efficient grid sizing -->
+
+	<div class="row" style="justify-content: space-evenly; 
+							align-items: flex-start;">
+							
 		<div class="grid-selector column">
-			<h3>Grid Size:</h3>
+			<h2>Grid Size:</h2>
 			<span class="row">
 				Width: <input id="width" type="number" placeholder="10">
 			</span>
@@ -26,8 +33,21 @@
 	
 	
 		<div class="column" style="align-items: flex-start;">
-			<h3>Select a Block:</h3>
-			<div id="blockSelection" class="row">
+			<h2>Select a Block:</h2>
+			<div id="blockSelection" class="column">
+
+				<h3>Wood</h3>
+				<div id="wood" class="row">
+				</div>
+				<h3>Nature</h3>
+				<div id="nature" class="row">
+				</div>
+				<h3>Stone</h3>
+				<div id="stone" class="row">
+				</div>
+				<h3>Decorative</h3>
+				<div id="decorative" class="row">
+				</div>
 			</div>
 
 		</div>

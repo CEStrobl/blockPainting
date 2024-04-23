@@ -11,7 +11,6 @@ let blockNames = ["empty",
 "glowstone","amethyst block","bookshelf","barrel","glass",    
 ]
 let blockImgs = []
-// automate that later ^
 
 let blockSelectionElements = []
 
@@ -26,8 +25,6 @@ let isMouseDown = false;
 
 let activeWidth = 0;
 let activeHeight = 0;
-
-
 
 
 
@@ -72,6 +69,20 @@ function selectBlock(thisBlock, index) {
 	prevSelected = selected;
 }
 
+function checkKeyWords(blockName, arrayOfWords) {
+	let retVal = false; 
+
+	for (let i = 0; i < arrayOfWords.length; i++) {
+		const x = arrayOfWords[i];
+		
+		if(blockName.includes(x)){
+			retVal = true;
+		}
+	}
+
+	return retVal;
+}
+
 
 function populateBlockSelection() {
 	let blockContainer = document.getElementById("blockSelection")
@@ -79,8 +90,30 @@ function populateBlockSelection() {
 	for (let i = 1; i < blockNames.length; i++) {
 		const blockName = blockNames[i];
 		const img = blockImgs[i];
+
+		let category = "None"
+
+		let woodWords = ["plank", "log"]
+		let natureWords = ["leave", "moss", "grass", "flower"]
+		let stoneWords = ["stone", "cobble", "slate", "quartz"]
+
+		// Determine Category
+		if (checkKeyWords(blockName, woodWords)) {
+			category = document.getElementById("wood")
+		} 
+		else if (checkKeyWords(blockName, natureWords)){
+			category = document.getElementById("nature")
+		} 
+		else if (checkKeyWords(blockName, stoneWords) ) {
+			category = document.getElementById("stone")
+		} 
+		else {
+			category = document.getElementById("decorative")
+		}
 		
-		embedImg(blockContainer, "img", img, blockName)
+
+		// Generate image
+		embedImg(category, "img", img, blockName)
 
 		let thisBlock = document.getElementById(blockName)
 

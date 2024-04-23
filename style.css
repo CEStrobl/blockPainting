@@ -27,18 +27,26 @@ img:hover{
 	filter: brightness(1.5);
 }
 
-#blockSelection{
-	margin: 30px 10px 30px 10px;
-	justify-content: space-around;
-	flex-wrap: wrap;
-}
-
 .selected {
 	border: 3px solid rgb(57, 64, 197) !important;
 }
+
+#blockSelection{
+	/* justify-content: space-around; */
+	flex-wrap: wrap;
+	align-items: flex-start;
+	overflow:scroll;
+	height: 100px;;
+}
+
+
 #blockSelection img {
 	border: 3px solid white;
 	transition: 0.2s ease;
+}
+
+#blockSelection h3{
+	margin-bottom:7px;
 }
 
 #blockSelection img:hover {

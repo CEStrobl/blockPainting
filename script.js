@@ -1,15 +1,93 @@
 let blockNames = ["empty", 
-"spruce log",  "spruce planks",
-"oak log","oak planks", "stripped oak log",
-"dark oak log","dark oak planks","stripped dark oak log",
-"birch log","birch planks",
-"oak leaves","jungle leaves","moss block","flowering azalea leaves",
-"quartz pillar","quartz block",
-"blackstone", "polished blackstone bricks",
-"deepslate tiles","deepslate bricks","cobbled deepslate", "stone bricks", 
-"cobblestone", "andesite","polished andesite", "basalt",
-"glowstone","amethyst block","bookshelf","barrel","glass",    
+"oak log", 
+"stripped oak log", 
+"oak planks", 
+
+"spruce log", 
+"stripped spruce log", 
+"spruce planks", 
+
+"dark oak log", 
+"stripped dark oak log", 
+"dark oak planks", 
+
+"birch log", 
+"birch planks", 
+
+"moss block", 
+"oak leaves", 
+"jungle leaves", 
+"flowering azalea leaves", 
+"cherry leaves", 
+
+"sand", 
+"smooth sandstone", 
+"chiseled sandstone", 
+
+"quartz pillar", 
+"quartz block",
+"quartz bricks", 
+
+"cobblestone", 
+"stone bricks", 
+"chiseled stone bricks", 
+"mossy stone bricks", 
+"bricks", 
+
+"blackstone", 
+"polished blackstone bricks", 
+"chiseled polished blackstone", 
+"gilded blackstone", 
+
+"deepslate", 
+"cobbled deepslate", 
+"deepslate tiles", 
+"deepslate bricks", 
+
+"obsidian", 
+"crying obsidian", 
+"andesite", 
+"polished andesite", 
+
+"basalt", 
+
+"emerald ore", 
+"diamond ore", 
+"gold ore", 
+"lapis ore", 
+"iron ore", 
+"coal ore", 
+
+"glowstone", 
+"amethyst block", 
+
+"crafting table", 
+"furnace", 
+"blast furnace", 
+"smoker", 
+"barrel", 
+"smithing table", 
+"cauldron", 
+"bookshelf", 
+"note block", 
+
+"bamboo block", 
+"redstone lamp", 
+"sea lantern", 
+
+"glass", 
+"light gray stained glass", 
+
+"sculk", 
+"beehive", 
 ]
+
+let wood = []
+let nature = []
+let stone = []
+let mines = []
+let decorative = []
+
 let blockImgs = []
 
 let blockSelectionElements = []
@@ -93,24 +171,38 @@ function populateBlockSelection() {
 
 		let category = "None"
 
-		let woodWords = ["plank", "log"]
-		let natureWords = ["leave", "moss", "grass", "flower"]
-		let stoneWords = ["stone", "cobble", "slate", "quartz"]
+		if (!checkKeyWords(blockName, ["lamp", "glowstone"])) {
+			let woodWords = ["plank", "log"]
+			let natureWords = ["sand", "leave", "moss ", "grass", "flower", "quartz"]
+			let stoneWords = ["stone", "cobble", "slate", "brick", "basalt"]
+			let minesWords = ["ore", "obsidian", "andesite", "diorite", "amethyst", "sculk"]
+	
+			// Determine Category
+			if (checkKeyWords(blockName, woodWords)) {
+				category = document.getElementById("wood")
+				wood.push(blockName)
+			} 
+			else if (checkKeyWords(blockName, natureWords)){
+				category = document.getElementById("nature")
+				nature.push(blockName)
+			} 
+			else if (checkKeyWords(blockName, stoneWords) ) {
+				category = document.getElementById("stone")
+				stone.push(blockName)
+			} 
+			else if (checkKeyWords(blockName, minesWords)){
+				category = document.getElementById("mines")
+				mines.push(blockName)
+			} 
+			else {
+				category = document.getElementById("decorative")
+				decorative.push(blockName)
+			}
 
-		// Determine Category
-		if (checkKeyWords(blockName, woodWords)) {
-			category = document.getElementById("wood")
-		} 
-		else if (checkKeyWords(blockName, natureWords)){
-			category = document.getElementById("nature")
-		} 
-		else if (checkKeyWords(blockName, stoneWords) ) {
-			category = document.getElementById("stone")
-		} 
-		else {
+		} else {
 			category = document.getElementById("decorative")
+			decorative.push(blockName)
 		}
-		
 
 		// Generate image
 		embedImg(category, "img", img, blockName)
@@ -127,6 +219,24 @@ function populateBlockSelection() {
 }
 
 populateBlockSelection()
+
+let newBlockNames = []
+function redoBlockNames() {
+	newBlockNames = wood.concat(nature, stone, mines, decorative);
+
+	let output = "";
+
+	for (let i = 0; i < newBlockNames.length; i++) {
+		const x = newBlockNames[i];
+		
+		output += ("\"" + x + "\", \n");
+	}
+	console.log(output);
+}
+
+redoBlockNames()
+
+
 
 let container = document.getElementById("container")
 
